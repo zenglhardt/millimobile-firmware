@@ -41,6 +41,22 @@ static const struct bt_data ad[] = {
     BT_DATA(BT_DATA_NAME_COMPLETE, DEVICE_NAME, DEVICE_NAME_LEN),
 };
 
+#define COMPANY_ID_CODE 0x0059
+
+typedef struct the_adc_data {
+        int32_t adc_value;
+} the_adc_data_type;
+
+static the_adc_data_type the_adc_data = {COMPANY_ID_CODE, 0x00};
+
+static unsigned char url_data[] = { 0x17, '/', '/', 'a', 'c', 'a', 'd', 'e', 'm',
+				    'y',  '.', 'n', 'o', 'r', 'd', 'i', 'c', 's',
+				    'e',  'm', 'i', '.', 'c', 'o', 'm' };
+
+static const struct bt_data sd[] = {
+	BT_DATA(BT_DATA_URI, url_data, sizeof(url_data)),
+};
+
 //////////////////////// BLE //////////////////////////
 
 //TIMING (all ms)
@@ -183,6 +199,7 @@ void readADC(struct k_work *work) //reads all ADC channels and stores mV outputs
                // printk("Raw Value: %d, ", adc_outputs_mv[i]);
                 //adc_outputs_mv[i] = adc_raw_to_millivolts_dt(&adc_channels[i], &val);
                 adc_raw_to_millivolts(adc_ref_internal(adc_channels[i].dev), adc_channels[i].channel_cfg.gain, adc_channels[i].resolution, &adc_outputs_mv[i]);
+                bt_le_adv_update_data(ad, ARRAY_SIZE(ad), sd, ARRAY_SIZE(sd));
                 //adc_outputs_mv[i] = (int32_t)buf;
                // printk("MV Value: %d\n", adc_outputs_mv[i]);
         }
@@ -244,7 +261,7 @@ void main(void)
 	err = bt_enable(NULL);
 	if (err) return;
 
-	err = bt_le_adv_start(adv_param, ad, ARRAY_SIZE(ad), NULL, 0);
+        err = bt_le_adv_start(adv_param, ad, ARRAY_SIZE(ad), sd, ARRAY_SIZE(sd));
 	if (err) return;
 
 	for (;;) {
