@@ -93,7 +93,7 @@ ROBOT_STEP_TIME is the time between robot steps.
 
 // Constants for min val read on ADC for capacitor to discharge/recharge
 #define SUPER_CAP_THRESHOLD_MV 2000 //190// Need to tune this value
-#define MOTOR_CAP_RELEASE_THRESHOLD_MV 3000//310 //need to tune
+#define MOTOR_CAP_RELEASE_THRESHOLD_MV 2500//310 //need to tune
 #define SUPER_CAP_THRESHOLD (SUPER_CAP_THRESHOLD_MV / 2)
 #define MOTOR_CAP_RELEASE_THRESHOLD (MOTOR_CAP_RELEASE_THRESHOLD_MV / 6)
 
