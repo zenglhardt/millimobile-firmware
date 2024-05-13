@@ -8,6 +8,7 @@
 #include <zephyr/logging/log.h>
 #include <zephyr/bluetooth/bluetooth.h>
 #include <zephyr/bluetooth/gap.h>
+#include <zephyr/bluetooth/hci.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/drivers/adc.h>
 #include <zephyr/pm/pm.h>
@@ -36,26 +37,40 @@ static struct bt_le_adv_param *adv_param =
 #define DEVICE_NAME CONFIG_BT_DEVICE_NAME
 #define DEVICE_NAME_LEN (sizeof(DEVICE_NAME) - 1)
 
-static const struct bt_data ad[] = {
-    BT_DATA_BYTES(BT_DATA_FLAGS, BT_LE_AD_NO_BREDR),
-    BT_DATA(BT_DATA_NAME_COMPLETE, DEVICE_NAME, DEVICE_NAME_LEN),
-};
+// static const struct bt_data ad[] = {
+//     BT_DATA_BYTES(BT_DATA_FLAGS, BT_LE_AD_NO_BREDR),
+//     BT_DATA(BT_DATA_NAME_COMPLETE, DEVICE_NAME, DEVICE_NAME_LEN),
+// };
 
+#define CUSTOM_ADV_TYPE 0xFF 
 #define COMPANY_ID_CODE 0x0059
 
 typedef struct the_adc_data {
+        uint16_t company_id;
         int32_t adc_value;
 } the_adc_data_type;
 
 static the_adc_data_type the_adc_data = {COMPANY_ID_CODE, 0x00};
 
-static unsigned char url_data[] = { 0x17, '/', '/', 'a', 'c', 'a', 'd', 'e', 'm',
-				    'y',  '.', 'n', 'o', 'r', 'd', 'i', 'c', 's',
-				    'e',  'm', 'i', '.', 'c', 'o', 'm' };
-
-static const struct bt_data sd[] = {
-	BT_DATA(BT_DATA_URI, url_data, sizeof(url_data)),
+static const struct bt_data ad[] = {
+        BT_DATA_BYTES(BT_DATA_FLAGS, BT_LE_AD_NO_BREDR),
+        BT_DATA(CUSTOM_ADV_TYPE, (const uint8_t *)&the_adc_data, sizeof(the_adc_data)),
 };
+
+static struct bt_data sd[1];
+
+void update_advertising_data(int32_t new_adc_value) {
+        the_adc_data.adc_value = new_adc_value;
+
+        int err = bt_le_adv_start(adv_param, ad, ARRAY_SIZE(ad), sd, ARRAY_SIZE(sd));
+        if (err) {
+                printk("Advertising failed to start (Error %d)\n", err);
+        }
+}
+
+// static const struct bt_data sd[] = {
+// 	BT_DATA(BT_DATA_URI, url_data, sizeof(url_data)),
+// };
 
 //////////////////////// BLE //////////////////////////
 
@@ -199,10 +214,10 @@ void readADC(struct k_work *work) //reads all ADC channels and stores mV outputs
                // printk("Raw Value: %d, ", adc_outputs_mv[i]);
                 //adc_outputs_mv[i] = adc_raw_to_millivolts_dt(&adc_channels[i], &val);
                 adc_raw_to_millivolts(adc_ref_internal(adc_channels[i].dev), adc_channels[i].channel_cfg.gain, adc_channels[i].resolution, &adc_outputs_mv[i]);
-                bt_le_adv_update_data(ad, ARRAY_SIZE(ad), sd, ARRAY_SIZE(sd));
                 //adc_outputs_mv[i] = (int32_t)buf;
                // printk("MV Value: %d\n", adc_outputs_mv[i]);
         }
+        update_advertising_data(adc_outputs_mv[MOTOR_CAP_1_IDX]);
 }
 K_WORK_DEFINE(adc_work, readADC);
 
