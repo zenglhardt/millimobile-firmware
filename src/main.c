@@ -259,6 +259,9 @@ void robot_step(struct k_work *work)
                         k_timer_start(&motor_shutoff_timer, K_MSEC(MOTOR_SHUTOFF_TIME), K_NO_WAIT);
                 }
         }
+        /* toma: update ble adv with adc value */
+        update_advertising_data(adc_outputs_mv[MOTOR_CAP_1_IDX]);
+
         k_timer_start(&adc_timer, K_MSEC(ROBOT_STEP_TIME - ADC_TIME), K_NO_WAIT);
         k_timer_start(&robot_step_timer, K_MSEC(ROBOT_STEP_TIME), K_NO_WAIT);
         //printk("Robot Step\n");
