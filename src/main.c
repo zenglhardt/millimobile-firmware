@@ -106,6 +106,13 @@ int32_t adc_outputs_mv[ARRAY_SIZE(adc_channels)];
 #define MOTOR_CAP_1_IDX 1
 #define MOTOR_CAP_2_IDX 2
 
+// Motion State (Left, Right, Straight)
+#define STRIAHGHT 0
+#define LEFT 1
+#define RIGHT 2
+#define STOP 3
+uint16_t motion_state = STRIAHGHT;
+
 K_WORK_DEFINE(robot_step_work, robot_step);
 
 void robot_step_timer_handler(struct k_timer *dummy)
@@ -221,9 +228,27 @@ void robot_step(struct k_work *work)
                 gpio_pin_set(gpio0, CAP_SWITCH_PIN, 1);
                 //printk("Switching to motor caps\n");
                 if(adc_outputs_mv[MOTOR_CAP_1_IDX] >= MOTOR_CAP_RELEASE_THRESHOLD && adc_outputs_mv[MOTOR_CAP_2_IDX] >= MOTOR_CAP_RELEASE_THRESHOLD){
+                        switch (motion_state)
+                        {
+                        case STRIAHGHT:
+                                gpio_pin_set(gpio1, MOTOR_1_CAP_PIN, 1);
+                                gpio_pin_set(gpio0, MOTOR_2_CAP_PIN, 1);
+                                break;
+                        
+                        case LEFT:
+                                gpio_pin_set(gpio0, MOTOR_2_CAP_PIN, 1);                    
+                                break;
+                        case RIGHT:
+                                gpio_pin_set(gpio1, MOTOR_1_CAP_PIN, 1);
+                                break;
+                        case STOP:
+                                /* do nothing lol */
+                                break;
+                        default:
+                                break;  
+                        }
                        // printk("motors triggered\n");
-                        gpio_pin_set(gpio1, MOTOR_1_CAP_PIN, 1);
-                        gpio_pin_set(gpio0, MOTOR_2_CAP_PIN, 1);
+                        
                         k_timer_start(&motor_shutoff_timer, K_MSEC(MOTOR_SHUTOFF_TIME), K_NO_WAIT);
                 }
         }
