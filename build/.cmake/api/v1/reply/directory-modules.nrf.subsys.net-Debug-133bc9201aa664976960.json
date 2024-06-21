@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "modules/nrf/subsys/net",
+		"source" : "/opt/nordic/ncs/v2.6.0/nrf/subsys/net"
+	}
+}

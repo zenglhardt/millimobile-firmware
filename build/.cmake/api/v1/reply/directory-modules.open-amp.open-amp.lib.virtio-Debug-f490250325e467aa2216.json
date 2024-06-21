@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "modules/open-amp/open-amp/lib/virtio",
+		"source" : "/opt/nordic/ncs/v2.6.0/modules/lib/open-amp/open-amp/lib/virtio"
+	}
+}

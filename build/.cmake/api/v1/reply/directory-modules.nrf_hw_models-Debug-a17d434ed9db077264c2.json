@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "modules/nrf_hw_models",
+		"source" : "/opt/nordic/ncs/v2.6.0/modules/bsim_hw_models/nrf_hw_models"
+	}
+}

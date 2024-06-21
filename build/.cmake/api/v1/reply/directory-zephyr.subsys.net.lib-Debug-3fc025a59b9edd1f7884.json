@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "zephyr/subsys/net/lib",
+		"source" : "/opt/nordic/ncs/v2.6.0/zephyr/subsys/net/lib"
+	}
+}

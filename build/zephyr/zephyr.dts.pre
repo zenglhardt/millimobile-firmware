@@ -1320,8 +1320,16 @@ zephyr_udc0: &usbd {
 # 13 "/Users/tomaitagaki/Documents/GitHub/millimobile-firmware/nrf5340dk_nrf5340_cpuapp.overlay"
 / {
  zephyr,user {
-  io-channels = <&adc 0>, <&adc 1>, <&adc 2>;
+  io-channels = <&adc 0>, <&adc 1>, <&adc 2>, <&adc 7>;
  };
+};
+
+/ {
+    chosen {
+        zephyr,console = &uart0;
+        zephyr,shell-uart = &uart0;
+        zephyr,uart-mcumgr = &uart0;
+    };
 };
 
 &adc {
@@ -1354,14 +1362,22 @@ zephyr_udc0: &usbd {
   zephyr,input-positive = <3>;
         zephyr,resolution = < 12 >;
  };
+
+ channel@7 {
+  reg = <7>;
+  zephyr,gain = "ADC_GAIN_1";
+  zephyr,reference = "ADC_REF_INTERNAL";
+  zephyr,acquisition-time = <0>;
+  zephyr,input-positive = <5>;
+  zephyr,input-negative = <4>;
+  zephyr,resolution = <12>;
+  zephyr,oversampling = <4>;
+ };
 };
 
 &uart0 {
-    status = "disabled";
-};
-
-&uart1 {
-    status = "disabled";
+    current-speed = <115200>;
+    status = "okay";
 };
 # 0 "<command-line>" 2
 # 1 "/opt/nordic/ncs/v2.6.0/zephyr/misc/empty_file.c"

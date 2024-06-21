@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "zephyr/boards/boards/arm/nrf5340dk_nrf5340_cpuapp",
+		"source" : "/opt/nordic/ncs/v2.6.0/zephyr/boards/arm/nrf5340dk_nrf5340"
+	}
+}

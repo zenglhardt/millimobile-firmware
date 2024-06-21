@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "modules/cmsis/cmsis/CMSIS/Core",
+		"source" : "/opt/nordic/ncs/v2.6.0/modules/hal/cmsis/CMSIS/Core"
+	}
+}

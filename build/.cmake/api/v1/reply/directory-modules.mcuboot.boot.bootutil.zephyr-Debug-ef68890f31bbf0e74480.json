@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "modules/mcuboot/boot/bootutil/zephyr",
+		"source" : "/opt/nordic/ncs/v2.6.0/bootloader/mcuboot/boot/bootutil/zephyr"
+	}
+}

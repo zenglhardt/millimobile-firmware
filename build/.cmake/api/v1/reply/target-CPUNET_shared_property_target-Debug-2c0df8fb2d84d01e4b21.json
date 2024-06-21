@@ -1,0 +1,62 @@
+{
+	"backtrace" : 5,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target",
+			"include",
+			"add_child_image_from_source",
+			"add_child_image"
+		],
+		"files" : 
+		[
+			"build/hci_ipc/shared_vars.cmake",
+			"/opt/nordic/ncs/v2.6.0/nrf/cmake/multi_image.cmake",
+			"/opt/nordic/ncs/v2.6.0/nrf/samples/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 148,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 178,
+				"parent" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 456,
+				"parent" : 2
+			},
+			{
+				"file" : 0,
+				"parent" : 3
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 2,
+				"parent" : 4
+			}
+		]
+	},
+	"id" : "CPUNET_shared_property_target::@f5912b38358e1aaccf15",
+	"name" : "CPUNET_shared_property_target",
+	"paths" : 
+	{
+		"build" : "modules/nrf/samples",
+		"source" : "/opt/nordic/ncs/v2.6.0/nrf/samples"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}

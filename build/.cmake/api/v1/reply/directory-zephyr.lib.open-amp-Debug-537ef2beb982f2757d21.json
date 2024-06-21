@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "zephyr/lib/open-amp",
+		"source" : "/opt/nordic/ncs/v2.6.0/zephyr/lib/open-amp"
+	}
+}
