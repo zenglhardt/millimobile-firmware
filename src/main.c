@@ -107,7 +107,7 @@ int32_t adc_outputs_mv[ARRAY_SIZE(adc_channels)];
 #define MOTOR_CAP_2_IDX 2
 
 // Motion State (Left, Right, Straight)
-#define STRIAHGHT 0
+#define STRAIGHT 0
 #define LEFT 1
 #define RIGHT 2
 #define STOP 3
