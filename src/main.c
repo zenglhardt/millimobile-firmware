@@ -266,11 +266,11 @@ void main(void)
 	k_timer_start(&adc_timer, K_MSEC(ADC_TIME), K_NO_WAIT);
         k_timer_start(&robot_step_timer, K_MSEC(ADC_TIME*2), K_NO_WAIT);
 
-	err = bt_enable(NULL);
-	if (err) return;
+	// err = bt_enable(NULL);
+	// if (err) return;
 
-	err = bt_le_adv_start(adv_param, ad, ARRAY_SIZE(ad), NULL, 0);
-	if (err) return;
+	// err = bt_le_adv_start(adv_param, ad, ARRAY_SIZE(ad), NULL, 0);
+	// if (err) return;
 
 	for (;;) {
 		k_cpu_idle();
