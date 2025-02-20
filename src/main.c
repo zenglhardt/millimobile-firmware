@@ -111,7 +111,7 @@ int32_t adc_outputs_mv[ARRAY_SIZE(adc_channels)];
 #define LEFT 1
 #define RIGHT 2
 #define STOP 3
-uint16_t motion_state = STRIAHGHT;
+uint16_t motion_state = STRAIGHT;
 
 K_WORK_DEFINE(robot_step_work, robot_step);
 
