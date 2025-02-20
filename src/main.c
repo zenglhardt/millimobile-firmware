@@ -230,7 +230,7 @@ void robot_step(struct k_work *work)
                 if(adc_outputs_mv[MOTOR_CAP_1_IDX] >= MOTOR_CAP_RELEASE_THRESHOLD && adc_outputs_mv[MOTOR_CAP_2_IDX] >= MOTOR_CAP_RELEASE_THRESHOLD){
                         switch (motion_state)
                         {
-                        case STRIAHGHT:
+                        case STRAIGHT:
                                 gpio_pin_set(gpio1, MOTOR_1_CAP_PIN, 1);
                                 gpio_pin_set(gpio0, MOTOR_2_CAP_PIN, 1);
                                 break;
